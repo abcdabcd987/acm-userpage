@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--
+Source Code:
+https://github.com/abcdabcd987/acm-userpage
+-->
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>ACM班个人页面管理</title>
+    <style type="text/css">
+        *, textarea, input, a, p, td, code, pre { font-family: Menlo, Consolas, "Courier New", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", monospace; }
+    </style>
+</head>
+<body>
+{% with messages = get_flashed_messages(with_categories=true) -%}
+  {%- if messages -%}
+      {%- for category, message in messages %}
+        <div><strong>{{message | safe}}</strong></div>
+      {% endfor -%}
+      <hr>
+  {%- endif -%}
+{%- endwith %}
+{% block body %}{% endblock %}
+</body>
+</html>

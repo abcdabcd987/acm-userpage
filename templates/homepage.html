@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>ACM班个人页面管理</h1>
+{% if user %}
+<h2>你好{{ user['name'] }} <small>({{ user['jaccount'] }}, {{ user['stuid'] }})</small></h2>
+<ul>
+    <li><a href="{{ url_for('get_ssh_key') }}">管理 SSH Key</a></li>
+    <li><a href="https://acm.sjtu.edu.cn/~{{ user['jaccount'] }}">访问我的页面</a></li>
+    <li><a href="{{ url_for('logout_oauth') }}">登出 jAccount</a></li>
+    <li><a href="{{ url_for('help') }}">查看帮助</a></li>
+</ul>
+{% else %}
+<h2>你好</h2>
+<ul>
+    <li><a href="{{ url_for('login_oauth') }}">使用 jAccount 登入</a></li>
+    <li><a href="{{ url_for('help') }}">查看帮助</a></li>
+</ul>
+{% endif %}
+
+<hr>
+<h2>用户列表</h2>
+<ul>
+{% for u in known_users %}
+    <li><a href="https://acm.sjtu.edu.cn/~{{ u['jaccount'] }}">20{{ u['stuid'][1:3] }}级 - {{ u['name'] }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

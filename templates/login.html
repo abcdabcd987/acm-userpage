@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>登入</h1>
+<p>
+    <a href="{{ url_for('login_oauth') }}">使用 jAccount 登入</a>
+</p>
+{% endif %}
+{% endblock %}

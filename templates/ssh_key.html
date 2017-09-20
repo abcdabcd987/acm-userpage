@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body %}
+<div><a href="{{ url_for('homepage') }}">(- 回首页)</a></div>
+<h1>管理 SSH Key <small>({{ user['name'] }}, {{ user['jaccount'] }}, {{ user['stuid'] }})</small></h1>
+<div>
+如果你没有 SSH Key，你可以使用 <strong><code>ssh-keygen</code></strong> 来生成一个。<br>
+使用 <strong><code>cat ~/.ssh/id_rsa.pub</code></strong> 来获取你的 SSH Key，然后复制粘贴到这里。<br>
+如果你是 Windows 用户或者需要更多帮助，请访问<a href="{{ url_for('help') }}">这里</a>。<br>
+</div>
+<form action="{{ url_for('save_ssh_key') }}" method="post">
+    <div>
+        <textarea name="keys" cols="80" rows="10"
+        placeholder="ssh-rsa AAAA... {{ username }}@hostname&#10;每行一个 SSH Key">{{ keys }}</textarea>
+    </div>
+    <div>
+        <input type="submit" value="保存">
+    </div>
+</form>
+{% endblock %}

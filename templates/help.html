@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block body %}
+<div><a href="{{ url_for('homepage') }}">(- 回首页)</a></div>
+<h1>ACM班个人页面使用帮助</h1>
+<h2>必要信息</h2>
+<p>ACM班个人页面旨在为ACM班学生提供一个可以放置个人学术网站的空间。</p>
+<ul>
+    <li>管理页面： <a href="https://acm.sjtu.edu.cn/userpage-manage">https://acm.sjtu.edu.cn/userpage-manage</a></li>
+    <li>网站地址： https://acm.sjtu.edu.cn/~jaccount</li>
+    <li>只支持静态页面</li>
+    <li>索引顺序： index.html, index.htm, index.xml</li>
+    <li>文件夹自动索引开启，如文件夹内没有上面文件之一，则会显示文件列表</li>
+    <li>文件配额： 100MB</li>
+    <li>文件上传方式： SFTP</li>
+    <li>SFTP 主机： acm.sjtu.edu.cn</li>
+    <li>SFTP 端口： 2222</li>
+    <li>SFTP 用户名： jAccount</li>
+    <li>SFTP 认证方式： SSH Key，可在<a href="https://acm.sjtu.edu.cn/userpage-manage">管理页面</a>进行管理</li>
+    <li>推荐 SFTP 客户端： <a href="https://filezilla-project.org/download.php?show_all=1">FileZilla</a></li>
+    <li>推荐 SSH Key 生成程序： (Linux/Mac) <code>ssh-keygen</code>, (Windows) <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuttyGen</a></li>
+</ul>
+
+<h2>Linux/Mac 生成 SSH Key</h2>
+<p>如果你之前没有生成过 SSH Key，可以运行 <strong><code>ssh-keygen</code></strong>。</p>
+
+<h2>Windows 生成 SSH Key</h2>
+<p>如果你之前没有生成过 SSH Key，可以下载 <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuttyGen</a>，点击 <strong>Generate</strong>。生成完毕之后，分别点击 <strong>Save public key</strong> 和 <strong>Save private key</strong> 保存公钥和私钥。</p>
+<div><img src="{{ url_for('static', filename='puttygen.png') }}" width="479px" alt="puttygen"></div>
+
+<h2>管理页面添加 SSH Key</h2>
+<p>打开<a href="https://acm.sjtu.edu.cn/userpage-manage">管理页面</a>，使用 jAccount 登入。在 SSH Key 管理页面中，填入你的 SSH Key <strong>公钥</strong>。</p>
+<ul>
+    <li>Linux/Mac 获取公钥：<strong><code>cat ~/.ssh/id_rsa.pub</code></strong> 然后复制即可</li>
+    <li>Windows 获取公钥：打开 PuttyGen 生成的公钥文件，然后复制即可。</li>
+</ul>
+
+<h2>使用 FileZilla 上传文件</h2>
+<p>安装并打开 <a href="https://filezilla-project.org/download.php?show_all=1">FileZilla</a>，打开站点管理，添加新站点，按如下要求填写完成后连接即可。连接之后请将网页文件上传至 <strong>/public_html</strong> 文件夹内</p>
+<ul>
+    <li>协议： SFTP</li>
+    <li>端口： 2222</li>
+    <li>登入类型： 密钥文件</li>
+    <li>用户名： jaccount</li>
+    <li>密钥文件</li>
+    <ul>
+        <li>Mac: <strong><code>/Users/USERNAME/.ssh/id_rsa</code></strong></li>
+        <li>Linux: <strong><code>/home/USERNAME/.ssh/id_rsa</code></strong></li>
+        <li>Windows: 选择 PuttyGen 生成的<strong>私钥</strong>文件</li>
+    </ul>
+</ul>
+<div><img src="{{ url_for('static', filename='filezilla.png') }}" alt="filezilla" width="504px"></div>
+
+{% endblock %}
